@@ -5,16 +5,19 @@ import allure
 import pytest
 @allure.title('CURA Healthcare Service')
 @allure.description("make an appointemnt")
-@pytest.mark.smoke
-def test_make_appointment(self):
+
+def test_make_appointment():
     driver=webdriver.Chrome()
     driver.maximize_window()
     driver.get("https://katalon-demo-cura.herokuapp.com/")
-    make_appintment=driver.find_element(By.ID,"btn-make-appointment").click()
-    username=driver.find_element(By.ID, "txt-username")
+    make_appintment_element=driver.find_element(By.ID,"btn-make-appointment")
+    make_appintment_element.click()
+    username=driver.find_element(By.ID, "username")
     username.send_keys("John Deo")
-    password=driver.find_element(By.ID, "txt-password")
+    password=driver.find_element(By.NAME, "password")
     password.send_keys("ThisIsNotAPassword")
-    login=driver.find_element(By.ID,"btn-login").click()
+    login_element=driver.find_element(By.ID,"Login")
+    login_element.click()
     assert driver.current_url=="https://katalon-demo-cura.herokuapp.com/#appointment"
+    time.sleep(5)
     driver.quit()
